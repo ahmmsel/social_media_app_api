@@ -1,0 +1,13 @@
+type PaginationControl {
+  page: Int
+  limit: Int
+}
+
+type PageInformation {
+  currentPage: Int
+  totalPages: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  previous: PaginationControl
+  next: PaginationControl
+}

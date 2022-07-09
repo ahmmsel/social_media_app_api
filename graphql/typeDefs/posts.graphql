@@ -1,0 +1,47 @@
+type Post {
+  id: ID!
+  authorId: ID!
+  author: User
+  content: String!
+  picture: String
+  likes: [Like!]
+  isLiked: Boolean
+  totalLikes: Int
+  totalComments: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type Like {
+  id: ID!
+  likedBy: User!
+  likedOn: Post!
+}
+
+input CreatePostInput {
+  content: String!
+  picture: String
+}
+
+type Feed {
+  pageInformation: PageInformation
+  data: [Post!]
+}
+
+type Explore {
+  pageInformation: PageInformation
+  data: [Post!]
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): Post
+  likePost(id: ID!): Boolean
+  unlikePost(id: ID!): Boolean
+  deletePost(id: ID!): Boolean
+}
+
+type Query {
+  getPost(id: ID!): Post!
+  feedPosts(limit: Int!, page: Int!): Feed
+  explorePosts(limit: Int!, page: Int!): Explore
+}

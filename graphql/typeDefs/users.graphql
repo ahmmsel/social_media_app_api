@@ -1,0 +1,55 @@
+type User {
+  id: ID!
+  username: String!
+  picture: String
+  bio: String
+  posts: Int
+  following: Int
+  followers: Int
+  country: String
+  gender: String
+  isFollowed: Boolean
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Follow {
+  followerId: ID!
+  followingId: ID!
+}
+
+type UserPosts {
+  pageInformation: PageInformation
+  data: [Post!]
+}
+
+type UserResults {
+  hasMore: Boolean
+  data: [User!]
+}
+
+type UserFollowersOrFollowing {
+  pageInformation: PageInformation
+  data: [User!]
+}
+
+input UserInput {
+  username: String
+  picture: String
+  bio: String
+}
+
+type Mutation {
+  updateUser(input: UserInput!): User
+  followUser(id: ID!): Follow!
+  unfollowUser(id: ID!): Boolean!
+  deleteUser: Boolean!
+}
+
+type Query {
+  getUser(id: ID!): User!
+  getUserPosts(id: ID!, limit: Int!, page: Int!): UserPosts
+  getUserFollowers(id: ID!, limit: Int!, page: Int!): UserFollowersOrFollowing
+  getUserFollowing(id: ID!, limit: Int!, page: Int!): UserFollowersOrFollowing
+  getUserResults(query: String!, limit: Int!, cursor: Int!): UserResults
+}

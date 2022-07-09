@@ -1,0 +1,30 @@
+type Comment {
+  id: ID!
+  authorId: ID!
+  author: User
+  commentedOnId: ID!
+  commentedOn: Post
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CommentInput {
+  text: String!
+  commentedOnId: ID!
+}
+
+type Comments {
+  pageInformation: PageInformation
+  data: [Comment!]
+}
+
+type Query {
+  getComments(commentedOnId: ID!, limit: Int!, page: Int!): Comments
+}
+
+type Mutation {
+  addComment(input: CommentInput!): Comment
+  removeComment(id: ID!): Boolean
+  updateComment(id: ID!, text: String!): Comment
+}

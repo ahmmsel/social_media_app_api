@@ -1,0 +1,18 @@
+input LoginInput {
+  username: String
+  password: String
+  confirmPassword: String
+}
+
+type LoginResponse {
+  id: ID!
+  token: String!
+}
+
+type Query {
+  login(input: LoginInput!): LoginResponse!
+}
+
+type Mutation {
+  register(input: LoginInput!): LoginResponse
+}
